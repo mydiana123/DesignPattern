@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'抽象访问者：为该对象中的ConcreteElement的每一个类声明一个visit操作
+abstract class Visitor{
+    +op1():void
+    +op2():void
+}
+
+class ConcreteVisitor{
+    +op1():void
+    +op2():void
+}
+
+'所以可以看出来，访问者通过 Element 访问到了数据结构 并操作
+'而原本来说，访问者只能直接操作数据结构，二者耦合度大
+'访问者模式就是把访问者[对数据结构的操作]和数据结构进行了解耦
+
+'定义了一个accept()方法，可以接受一个访问者对象
+class Element{
+    '此类提供一个接口，供访问者访问。
+    accept(visitor:Visitor):void
+}
+'能枚举他的elements，并通过elements操作访问者。
+'可以提供一个高层接口允许访问者访问其元素
+class structure {
+    List<Element> elems;
+}
+
+@enduml
+
+可以看到，进行解耦的方法一般就是
+
+把互相耦合的对象，增加一个对象层，进行解耦
+比如：命令模式中
+invoker和receiver是耦合的。
+但是我们通过一个method对象，把互相耦合的对象达成了解耦
+在类里就体现为： 因为对象层解耦，需要对象层和两端都耦合
+要不然原本耦合的对象就无法进行交互了。
+所以我们的做法就是 把receiver交给method对象操作
+同时invoker操作method对象。
+这样invoker不知道receiver的具体细节，达到解耦
+
+在访问者模式里其实也这么干的。
+原本数据结构structure和操作方法operation是耦合的
+但是我们通过一个Element对象，用于操作operation方法
+同时structure内部聚合一个Element对象集合。用于操作Element对象
+这样structure对operation的具体细节是不知道的，
+达到了解耦

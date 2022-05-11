@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Configuration{
+newMetaObject(reflectorFactorty:ReflectorFactory...Object object):void
+}
+
+interface ReflectorFactory{}
+class DefaultReflectorFactory{}
+DefaultReflectorFactory --|> ReflectorFactory
+
+interface ObjectFactory{}
+class DefaultObjectFactory{}
+DefaultObjectFactory --|> ObjectFactory
+
+interface ObjectWrapperFactory{}
+class DefaultObjectWrapperFactory{}
+DefaultObjectWrapperFactory --|> ObjectWrapperFactory
+
+ObjectFactory --o Configuration
+ObjectWrapperFactory --o Configuration
+ReflectorFactory --o Configuration
+
+class MetaObject {}
+Configuration .|> MetaObject
+
+class Client{}
+client .|> Configuration
+
+@enduml

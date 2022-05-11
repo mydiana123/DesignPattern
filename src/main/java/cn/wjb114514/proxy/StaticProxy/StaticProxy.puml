@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class TeacherDao{
++teach():void
+}
+
+interface ITeacherDao{
++teach():void
+}
+
+TeacherDao ..|> ITeacherDao
+
+'被代理对象
+class TeacherDaoProxy{
++teach():void
+'代理对象需要用到原对象的方法，在此基础上实现增强
+-teacherDao:ITeacherDao
+setITeacherDao(teacherDao:ITeacherDao):void
+}
+
+TeacherDaoProxy ..|> ITeacherDao
+
+TeacherDaoProxy -o ITeacherDao
+
+Class Client{}
+Client --> TeacherDaoProxy
+
+@enduml

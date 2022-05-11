@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Pizza {
+prepare():void
+bake():void
+cut():void
+box():void
+}
+
+class BJCheesePizza {
+}
+
+class BJPepperPizza {
+}
+
+class LDCheesePizza {
+}
+class LDPepperPizza {
+}
+
+interface AbsFactory {
+    createPizza():void
+}
+
+class BJFactory{
+}
+class LDFactory{
+}
+
+
+Pizza <|-- BJCheesePizza
+Pizza <|-- BJPepperPizza
+Pizza <|-- LDCheesePizza
+Pizza <|-- LDPepperPizza
+
+
+BJFactory <|.. AbsFactory
+LDFactory <|.. AbsFactory
+
+
+BJCheesePizza <|-- BJFactory
+BJPepperPizza <|-- BJFactory
+
+LDCheesePizza <|-- LDFactory
+LDPepperPizza <|-- LDFactory
+class OrderPizza{}
+'orderPizza类通过抽象工厂，和其具体实现类工厂产生依赖
+'并调用实现类工厂的方法，完成对象的创建
+OrderPizza .o AbsFactory
+@enduml

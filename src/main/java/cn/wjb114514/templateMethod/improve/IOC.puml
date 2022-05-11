@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface ConfigurableApplicationContext{
+    +refresh():void
+}
+
+abstract class AbstractApplicationContext{
+    '模板方法
+    +refresh():void
+
+    +obtainBeanFactory():void
+    '模板方法内部需要的抽象方法，供子类具体实现
+    +{abstract}getBeanFactory():void
+    +{abstract}refreshBeanFactory():void
+
+    '钩子方法，默认空实现，如果子类重写，会干涉模板方法的执行流程，但不改变模板方法的框架
+    +postProcessBeanFactory():void
+    +onRefresh():void
+}
+
+abstract class GenericApplicationContext(){
+    '模板抽象类的实现子类1：实现了上面的两个抽象方法
+    +getBeanFactory():void
+    +refreshBeanFactory():void
+}
+'当然不同的子类实现逻辑不同，获取beanFactory的方式也略有不同
+abstract class AbstractRefreshableApplicationContext{
+    '模板抽象类的实现子类2：实现了上面的两个抽象方法
+    +getBeanFactory():void
+    +refreshBeanFactory():void
+}
+
+'其实到最后，AbstractRefreshableApplicationContext还有两个子类
+'一个是FileSystemApplicationContext，一个是ClasspathXMLApplicationContext
+'他们两个进一步的实现了+getBeanFactory():void
+            '    +refreshBeanFactory():void 这两个方法
+            '一个可以从类路径下的xml文件里读取beanFactory，一个可以从磁盘文件里读取beanFactory
+            '而子类仅仅规范了怎么读取beanFactory。beanFactory的初始化工作仍然交给模板方法refresh()进行
+
+@enduml

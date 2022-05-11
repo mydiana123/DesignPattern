@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/class-diagram
+class PersonDao {
+}
+class IdCard {
+}
+class Person {
+}
+class Department {
+}
+
+class PersonServiceBean {
+    -personDao:PersonDao
+    +save(person:Person):void
+    +getIdCard(personId:Integer):IdCard
+    +modify():void
+}
+
+'PersonServiceBean ..> IdCard
+PersonServiceBean ..> Person
+PersonServiceBean ..> IdCard
+PersonServiceBean ..> Department
+PersonServiceBean ..> PersonDao
+
+@enduml
+
+类图是描述类和类之间关系的，是uml图中最核心的
+依赖关系:只要在类中用到了[形参，返回值，局部变量，成员变量等]对方，就存在依赖关系

@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'src
+class Voltage220V{
+    +output220V():void
+}
+
+'dst
+interface Voltage5V{
+    +output5V():void
+}
+
+'adapter
+class VoltageAdapter{
+    '内部组合/组合src被适配者
+    voltage220V:Voltage220V
+    VoltageAdapter(voltage220V:Voltage220V):void
+}
+
+class Client{}
+
+class Phone{
+    +charging():void
+}
+
+Phone ..>Voltage5V
+VoltageAdapter ..|> Voltage5V
+VoltageAdapter --o Voltage220V
+Client --> Phone
+Client --> VoltageAdapter
+'Client需要传入一个Voltage220V对象
+Client --> Voltage220V
+@enduml

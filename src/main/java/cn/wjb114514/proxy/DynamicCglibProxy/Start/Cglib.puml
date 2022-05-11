@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'目标对象。没实现接口，这样JDK代理就失效了
+class TeacherDao{}
+
+'依旧是代理工厂
+class ProxyFactory{
+-teacherDao:TeacherDao
++ProxyFactory(teacherDao:TeacherDao):void
++getProxyInstance(): Object
+'重写方法拦截器的拦截方法，实现对目标对象的调用。
+intercept(): void
+}
+
+
+'由于cglib基于方法拦截器实现代理，所以需要实现方法拦截器
+interface MethodInterceptor{}
+
+@enduml

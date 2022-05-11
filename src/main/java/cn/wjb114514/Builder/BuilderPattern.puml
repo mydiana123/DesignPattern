@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'建造者的抽象类，仅提供建造对象的基本方法
+abstract class Builder {
+'内部组合了产品对象
+product:Product = new Product()
+}
+
+'建造者的实现子类，用于完善建造对象方法的细节
+class BuilderImpl {}
+
+'建造者的实现子类，用于完善建造对象方法的细节
+class BuilderImpl2 {}
+
+'建造者的实现子类，用于完善建造对象方法的细节
+class BuilderImpl3 {}
+
+'产品类
+class Product{}
+
+'监督者，用于实现产品和产品制作过程的分离
+class Director{
+'拥有一个Builder
+builder:Builder
+}
+
+BuilderImpl --|> Builder
+BuilderImpl2 --|> Builder
+BuilderImpl3 --|> Builder
+Director -o Builder
+Product --* Builder
+@enduml

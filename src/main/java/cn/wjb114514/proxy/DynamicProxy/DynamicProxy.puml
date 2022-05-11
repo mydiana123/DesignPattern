@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface ITeacherDao{
++teach():void
+}
+class TeacherDao {
++teach():void
+}
+TeacherDao ..|> ITeacherDao
+
+class ProxyFactory{
+'代理工厂的构造器
++proxyFactory():void
+'代理工厂的核心方法
+'根据传入的目标对象，使用反射，动态在内存里生成一个代理对象并返回
+'并使用代理对象调用目标方法，不直接调用目标方法
++getProxyInstance():Object
+}
+
+TeacherDao --o ProxyFactory
+
+
+
+@enduml

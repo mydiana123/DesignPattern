@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Command{
+ '执行命令
+ +execute():void
+ '撤销命令
+ +undo():void
+}
+
+class LightOnCommand {
+    '执行电灯的打开操作
+    +execute():void
+    +undo():void
+}
+
+class LightOffCommand {
+    '执行电灯的关闭操作
+    +execute():void
+    +undo():void
+}
+
+class LightReceiver{
+    +on():void
+    +off():void
+}
+
+'遥控器对象，也就是我们的 命令调用者
+class RemoteController{
+    Command[] onCommands;
+    Command[] offCommands;
+}
+
+Command -o RemoteController
+
+class NoCommand{
+    'no-op : 空命令 对于简化操作 有帮助。可以省去对空的判断。
+
+}
+
+class Client{}
+Client --> LightOnCommand
+Client --> LightOffCommand
+Client --> RemoteController
+Client --> LightReceiver
+Command <|.. LightOnCommand
+Command <|.. LightOffCommand
+
+LightReceiver --o LightOnCommand
+LightReceiver --o LightOffCommand
+@enduml

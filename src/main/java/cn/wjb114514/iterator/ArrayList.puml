@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+interface Iterable{
+    +iterator():Iterator
+}
+
+interface Iterator{}
+'此类是ArrayList类的一个内部类，用于让聚合对象对外提供迭代器。
+class Itr {}
+
+'实现了Iterable接口的类就是聚合接口
+'聚合接口主要用于聚合存储数据的接口，以及对外提供用于操作底层数据结构的迭代器
+List -|> Iterable
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'提供组合中各成分的统一标准：学校，学院，系都可以看做一个组织
+interface OrganizationComponent {
+'内部指定了操作叶子和树上节点的 统一方法.具体实现交给子类
++add():void
++remove():void
++print():void
+}
+
+'系：是一个叶子节点，只能作为被操作的角色
+class Department{}
+
+'学院：是非叶子，可以被操作，，也可以操作 其子节点，也就是系
+class College{}
+
+'学校：根节点，可以被操作，也可以操作子节点，也就是学院
+class University{}
+
+'需求的调用者
+class Client{}
+
+Client -|> OrganizationComponent
+Department --|> OrganizationComponent
+College --|> OrganizationComponent
+University --|> OrganizationComponent
+
+'实际上，节点内部聚合 的对象应该是OrganizationComponent类型的，但是运行类型是各子类因此具体的聚合关系应该是聚合OC这个对象，这里直接用具体的子类型表示这种聚合
+
+Department -o College
+
+College -o University
+
+@enduml

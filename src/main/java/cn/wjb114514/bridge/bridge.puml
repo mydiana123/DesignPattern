@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'桥接模式的调用者
+class Client{}
+
+'抽象类，维护了 具体实现类（通过聚合）
+'此类把实现和抽象的定义进行了桥接！
+abstract class Abstraction {
+    '运行类型为接口的具体实现类
+    implementor:Implementor
+    '聚合方式，通过构造器传递
+    +Abstraction(implementor:Implementor):void
+}
+
+'实现者，抽象层通过实现层 管理具体的实现类
+interface Implementor {
+}
+
+
+class ConcreteImplementorA {
+}
+
+class ConcreteImplementorB {
+}
+
+'是Abstraction的子类
+class RefinedAbstraction {}
+
+'这里的抽象类和接口是聚合的关系，是调用者和被调用者的关系
+@enduml

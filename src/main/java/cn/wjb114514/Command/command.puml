@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Command{
+    +execute():void
+    +undo():void
+}
+
+class ConcreteCommand{
+    -receiver:Receiver
+    +execute():void
+    +undo():void
+}
+
+class Receiver {
+    action():void
+}
+
+class Invoker{
+    command:Command
+}
+'由此可见，command完成了 :1.关联 invoker和receiver 2.解耦 invoker和receiver
+Invoker -o Command
+
+Command <|-- ConcreteCommand
+Receiver -o ConcreteCommand
+
+class Client{}
+Client --> ConcreteCommand
+Client --> Invoker
+Client --> Receiver
+
+'Invoker:调用者角色
+'Command:命令角色，需要执行的所有命令都在这里，可以是接口/抽象类
+'Receiver：接受者角色，直到如何执行一个请求相关的操作
+'ConcreteCommand:将一个接受者对象与一个动作绑定，调用接受者相关操作，实现执行。
+
+
+@enduml

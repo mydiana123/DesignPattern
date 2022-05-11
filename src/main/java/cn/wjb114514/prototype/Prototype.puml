@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'原型类，声明一个克隆自己的接口（比如clone方法）
+'java里原型类被声明为接口Cloneable
+interface Prototype{
+    +clone():void
+}
+
+'让一个原型对象克隆自己，从而创建一个新的对象
+'Sheep sheep = new Sheep
+'Sheep cloneSheep = sheep.clone()
+class Client {
+}
+
+'具体的原型类，实现克隆自己的操作
+'class Sheep implements Cloneable
+class ConcretePrototype{
+ +clone():void
+}
+
+class ConcretePrototype2 {
+ +clone():void
+}
+Client ..o Prototype
+Prototype <|.. ConcretePrototype
+Prototype <|.. ConcretePrototype2
+
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class SoyaMilk{
+    '做豆浆
+    +make():void
+    '选择原材料
+    +select():void
+    '添加配料 [具体实现由子类完成，不同豆浆配料不同]
+    +{abstract}add():void
+    '浸泡
+    +soak():void
+    '打浆
+    +beat():void
+}
+
+class BlackBeanSoyaMilk{}
+class PeanutSoyaMilk{}
+
+
+@enduml

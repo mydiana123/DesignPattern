@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'访问者，啥是访问者，==> 访问者就是 对数据结构的数据进行操作的类
+class Action{
+    +operation1():void
+    +operation2():void
+}
+
+class Success{
+    +operation1():void
+    +operation2():void
+}
+
+class Fail{
+    +operation1():void
+    +operation2():void
+}
+
+Action <|-- Fail
+Action <|-- Success
+
+'Element对象，提供访问者访问的接口
+'Element对象使得 访问者和Element对象本身的操作灵活
+'Element的子类和Visitor的子类，把原本乘法的组合关系，变成了加法的组合关系
+class Person {
+    +accept(action:Action);
+}
+
+class Man {
+    +accept(action:Action);
+}
+class Women {
+    +accept(action:Action);
+}
+
+Person --> Action
+Man <|-- Person
+Women <|-- Person
+
+'数据结构对象，内部有很多 Element的集合
+class ObjectStructure{
+    -elements:List<Person>
+}
+
+Person -o ObjectStructure
+
+@enduml

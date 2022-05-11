@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+' 外观类，也是界面类
+' 外观类 知道哪些子系统负责处理请求，将调用端的请求代理给适当的子系统对象。
+' 外观类就是一个前台代理， 其下管理很多子系统，我们给前台代理发指令
+' 指令就会经过代理，发布到具体的子系统
+class Facade {
+}
+
+' 子系统要聚合到外观类中，方便统一管理
+' 模块/子系统，负责处理facade代理对象指派的任务，是功能的实际提供者
+' 外观类是项目经理，子系统就是其部门下的员工，项目经理负责调度和指派任务
+class SubSystem1 {}
+class SubSystem2 {}
+class SubSystem3 {}
+
+SubSystem1 --o Facade
+SubSystem2 --o Facade
+SubSystem3 --o Facade
+
+
+' 外观接口的调用者
+'需求调用方
+class Client {}
+
+'需求调用者直接依赖界面类，而不直接依赖子系统[间接依赖子系统]
+Client -|> Facade
+@enduml

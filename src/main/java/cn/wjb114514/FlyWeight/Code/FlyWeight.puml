@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'这里的FlyWeight是指对象是轻量级，细粒度的，这样工厂才可以撑得住维护享元对象的开销。
+abstract class WebSite{
++{abstract}use():void
+}
+
+'具体的网站实现类
+class ConcreteWebSite{
+}
+
+'享元模式中的外部状态，也就是UnsharedConcreteFlyWeight
+'由于外部状态对应的对象，不能在享元池里进行共享，所以需要用户自行提供。不进行池中缓存。
+'因为外部对象是经常变化的，缓存命中率很低，没必要。
+class User {}
+
+'管理享元对象的池化工厂
+class WebSiteFactory {
++getWebSiteCategory():void
+}
+
+class Client{}
+
+Client --o User
+Client --o WebSiteFactory
+
+ConcreteWebSite --|> WebSite
+
+WebSiteFactory -o WebSite
+@enduml

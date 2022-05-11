@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'此类实现了模板方法:定义了算法的大体结构，
+'模板方法内部规范了一系列的方法执行流程，这一系列的方法中可能有待子类实现的抽象方法
+abstract class Template{
+    '抽象方法的执行模板[规定了算法的大体流程]
+    +templateMethod():void
+    '具体待子类实现的方法。
+    '注意，这些方法可以是抽象的，也可以是共有的方法，做成已实现的方法
+    '比如做豆浆的类，不需要重写父类的所有方法
+    '对于所有做豆浆的子类，他们有共同的步骤
+    +operation2():void
+    +operation3():void
+    +operation4():void
+}
+
+class ConcreteImplClassA {
+        +operation2():void
+        +operation3():void
+        +operation4():void
+}
+class ConcreteImplClassB {
+        +operation2():void
+        +operation3():void
+        +operation4():void
+}
+@enduml

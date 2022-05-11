@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Iterator{
++hasNext():boolean
++remove():void
++next:():E
+}
+
+
+'用于遍历 计算机学院下所有的系
+class ComputerCollegeIterator{}
+
+'用于遍历信息工程学院下的所有系
+class InfoCollegeIterator{}
+
+Iterator <|-- ComputerCollegeIterator
+Iterator <|-- InfoCollegeIterator
+
+class ComputerCollege{}
+class InfoCollege{}
+
+interface College{}
+College <|.. ComputerCollege
+College <|.. InfoCollege
+
+class Department {}
+ComputerCollegeIterator o-- Department
+InfoCollegeIterator o-- Department
+ComputerCollege o-- Department
+InfoCollege o-- Department
+
+ComputerCollegeIterator --> ComputerCollege
+InfoCollegeIterator --> InfoCollege
+
+'完成对所有学院的输出
+class Output{}
+Output -o College
+class Client{}
+Client ..> Output
+Client ..> Iterator
+
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'关联关系(直接用实线):是依赖关系的特例
+'关联具有导航性，即双向关系或单项关系
+'关联具有多重性:单项一对一:人和personId
+'双向一对一 person->personCard,PersonCard->Person
+
+'聚合关系:表示整体和部分的关系，是关联关系的特例
+'聚合关系描述的关系:整体和局部可以分开，同样具有导航型和多重性
+'如果A聚合B，并且把B给分离之后，A仍然可以正常运行(编译通过，并完成一定的功能)，这就是聚合
+
+class Computer {
+    -mouse:Mouse
+    -monitor:Monitor
+    '我们假设，鼠标和显示器可以和电脑分离
+    +setMouse(mouse:Mouse):void
+    +setMonitor(monitor:Monitor):void
+}
+
+class Mouse {
+}
+class Monitor{
+}
+
+Computer --o Mouse
+Computer --o Monitor
+
+'使用空心菱形描述聚合关系，因为可分离~
+
+'如果认为关联的关系是不可分离的，我们就把聚合升级为组合
+'比如用set方法就是聚合，因为可有可无，但是如果直接在成员变量new赋值，就升级为组合。
+
+class Computer2 {
+    -mouse:Mouse=new Mouse()
+    -monitor:Monitor=new Monitor()
+}
+Computer2 --* Monitor
+Computer2 --* Mouse
+@enduml
+// 聚合关系和组合关系
+public class Person {
+    IdCard idCard;
+    Head head = new Head(); // Person对象被new出来时，Head被创建，Person对象被gc时，Head随之消失，两者是组合关系，用实现实心菱形表示
+    public void setIdCart(IdCard idcard){this.idCard=idCard;} // Person对象被new出来时，IdCart是可有可无的。但是：如果存在级联删除的情况，也就是说，删除Person时，idCard一并删除，这时Peroson-IdCard就升级为组合关系
+}
+
+泛化和实现更多的描述了类与类之间同级的关系
+而关联关系主要描述类与类之间嵌套的关系，比如类A内部有一个类B，构成嵌套

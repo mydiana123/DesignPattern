@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Subject{
++registerObserver(observer:Observer):void
++removeObserver(observer:Observer):void
++notifyObserver(observers:Observer[]):void
+}
+
+class ConcreteSubject{
+-List<Observer> observers = new ArrayList<>();
++registerObserver(observer:Observer):void
++removeObserver(observer:Observer):void
++notifyObserver(observers:Observer[]):void
+}
+ConcreteSubject --|> Subject
+
+interface Observer{
++update():void
+}
+Subject -> Observer
+ConcreteSubject --o Observer
+
+class ConcreteObserver1{}
+class ConcreteObserver2{}
+Observer <|-- ConcreteObserver1
+Observer <|-- ConcreteObserver2
+'好处：扩展观察者时，subject主体不需要发生任何变化。
+'原有的实现模式中，如果增加一个观察者，subject内部需要为新的观察者
+'分配一个告示板，以便下一步的推送内容
+'而在观察者模式里，主体和观察者内部的聚合通过register/remove()完成
+'动态的调整，新增加一个观察者，只需要register，灵活的达成了主体对观察者的管理
+
+class Client{}
+Client ..> Subject
+Client ..> Observer
+@enduml

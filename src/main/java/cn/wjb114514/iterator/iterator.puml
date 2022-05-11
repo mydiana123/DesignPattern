@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+interface Iterator{
++hasNext():boolean
++remove():void
++next:():E
+}
+
+class ConcreteIterator{
++hasNext():boolean
++remove():void
++next:():E
+}
+class ConcreteIterator2{
++hasNext():boolean
++remove():void
++next:():E
+}
+
+Iterator <|-- ConcreteIterator
+Iterator <|-- ConcreteIterator2
+
+
+interface Aggregate {
++createIterator():Iterator
+}
+
+class ConcreteAggregate {
+-elems:ArrayList
+}
+
+class ConcreteAggregate2 {
+-elems:Element[]
+}
+
+Aggregate <|-- ConcreteAggregate2
+Aggregate <|-- ConcreteAggregate
+
+ConcreteIterator ..> ConcreteAggregate
+ConcreteIterator2 ..> ConcreteAggregate2
+@enduml
+
+Iterator:迭代器接口，java设计者提供 : hasNext(),remove(),next()
+ConcreteIterator:具体的迭代器类，管理迭代
+Aggregate:统一的聚合接口，内部可以提供一个迭代器，将客户端和具体的聚合[指数据的具体存放数据]解耦
+ConcreteAggregate:具体的聚合，持有对象的集合
+
+相当于在对象集合 和 遍历者 中间增加了一个聚合层，聚合层和遍历者之间有依赖关系。
+聚合层内部聚合了对象集合。
+我们只需要访问到遍历者，就可以访问到聚合层内部的对象集合。

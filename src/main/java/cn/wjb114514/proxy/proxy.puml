@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'需要对目标对象实现控制管理，不允许客户端使用operation1()方法
+class TargetObject{
++operation1():void
++operation2():void
+}
+
+class ProxyObject {
+}
+
+class Client{}
+@enduml

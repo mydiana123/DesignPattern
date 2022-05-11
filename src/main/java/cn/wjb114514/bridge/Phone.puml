@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'实现层
+interface Brand {
++call():void
+}
+
+'实现层的实现子类
+class Vivo {}
+class XiaoMi{}
+
+Brand <|.. Vivo
+Brand <|.. XiaoMi
+
+'此类就是抽象层，其内部聚合了具体的实现
+'通过此Phone，把抽象层的实现子类，和实现层的实现子类完成了聚合，所以抽象层起到桥接作用
+abstract class Phone{
+-brand:Brand
+}
+
+Phone .o Brand
+
+'抽象层的实现子类
+class FoldedPhone {}
+class UpRightPhone{}
+FoldedPhone --|> Phone
+UpRightPhone --|> Phone
+
+@enduml

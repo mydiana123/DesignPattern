@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'泛化是依赖关系的特例:只有依赖关系的继承时，才可以叫泛化
+'如果A类继承B类，我们就说A和B存在泛化关系
+'使用实线三角箭头从A->B
+class DaoSupport {
+    save():void
+    delete():void
+}
+
+class PersonServiceBean  {
+}
+
+DaoSupport <|-- PersonServiceBean
+@enduml

@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'抽象中介者 -- 定义了同事对象到中介者对象的接口
+abstract class Mediator{}
+
+'具体中介者，使用一个集合管理同事对象，并接受某个对象的消息，完成相应任务
+class ConcreteMediator{
+    '存放Colleague对象的子类对象集合。管理所有的同事类，完成其管理相应操作和任务
+    -colleague:HashMap
+    '中介者 在构造器里 放入了具体的同事类
+    +ConcreteMediator():void
+
+    '接受子系统组件的消息
+    getMessage():void
+}
+
+ConcreteMediator --|> Mediator
+
+'抽象同事类 ，叫同事是因为 我们管理的子系统 就是同事的关系，比如空调和咖啡机，二者就是兄弟或者同事关系，共同为客户端服务
+abstract class Colleague{
+    +sendMessage():void
+    '由于同事类要向 中介发消息，所以二者是耦合的，你中有我我中有你。
+    '也就是既然中介者用于协调各个同事类工作，目的是各个同事类不耦合
+    '那中介者就必然和所有同事类耦合，否则也无法达到各个同事类之间的不耦合沟通
+    +getMediator():Mediator
+}
+
+'具体同事类，很多。每个同事 只知道自己的行为，不了解其他同事类的行为 [单一职责原则]。
+'他们都依赖中介者对象， 即通过中介者，完成了各个子系统的松耦合。
+'中介者模式的精髓 就是 同事A =中介者=> 同事B
+'也就是各个同事之间，不管多么复杂的业务逻辑，任意两个同事的交互 都要经过中介者
+'从而达到了整个系统的 松耦合
+class ConcreteColleague{}
+ConcreteColleague --|> Colleague
+
+class Curtain{}
+class TV{}
+class Alarm{}
+class CoffeeMachine{}
+
+
+
+' 中介者 和
+Colleague ... Mediator
+Colleague -o ConcreteMediator
+
+@enduml
