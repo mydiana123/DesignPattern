@@ -46,3 +46,11 @@ Colleague ... Mediator
 Colleague -o ConcreteMediator
 
 @enduml
+
+说明:
+1.创建ConcreteMediator对象
+2.创建各个同事类的对象
+3.在创建同事类对象时，就直接通过构造器，加入到中介者的管理集合里
+4.同事类对象，可以调用sendMessage()，最终就去调用其他中介者的getMessage()方法
+5.getMessage会根据接收到的同事对象发出的消息，来协调调用其他的同时对象
+6.getMessage是核心方法，完成相应任务
