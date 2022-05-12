@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'声明一个抽象的解释操作。 此接口为抽象语法树里的所有结点所共享
+abstract class AbstractExpression{
+    +interpret():void
+}
+
+'终结符表达式 实现与文法中的终结符相关的解释操作
+class TerminalExpression {
+
+}
+
+TerminalExpression --|> AbstractExpression
+
+'非终结表达式 为文法中的非终结符实现解释操作
+class NonTerminalExpression {
+}
+
+NonTerminalExpression --|> AbstractExpression
+
+'非终结表达式，继承抽象表达式，并聚合抽象表达式
+AbstractExpression ---o NonTerminalExpression
+
+'环境角色:含有 ==> 解释器之外的全局信息
+class Context{}
+
+'输入Context 和 TerminalExpression的信息 通过Client输入即可
+class Client{}
+
+Client --> Context
+Client --> AbstractExpression
+
+@enduml

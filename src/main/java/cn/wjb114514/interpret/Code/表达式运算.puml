@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Expression {
+    +interpreter():void
+}
+
+class VarExpression {
+
+}
+
+'non-terminal
+class SymbolExpression {
+
+}
+
+Expression <|-- VarExpression
+Expression <|-- SymbolExpression
+Expression --o SymbolExpression
+
+'针对具体的符号运算进行划分
+class SubExpression {}
+
+class AddExpression {}
+
+SymbolExpression <|-- SubExpression
+SymbolExpression <|-- AddExpression
+
+class Calculator {}
+
+class Client {}
+
+Calculator --o Expression
+Client .> Calculator
+
+
+
+@enduml
