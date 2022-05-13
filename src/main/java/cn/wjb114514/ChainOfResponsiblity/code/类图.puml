@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Approver {
+    -approver:Approver
+    +processRequest():void
+}
+Approver ----o Approver
+class DepartmentApprover {
+
+}
+
+Approver <|-- DepartmentApprover
+
+class CollegeApprover {}
+
+Approver <|-- CollegeApprover
+
+class ViceSchoolMasterApprover {}
+Approver <|-- ViceSchoolMasterApprover
+
+class SchoolMasterApprover {}
+Approver <|-- SchoolMasterApprover
+
+class PurchaseRequest {}
+PurchaseRequest <-- Approver
+class Client{}
+Client --> PurchaseRequest
+Client --> Approver
+
+
+@enduml

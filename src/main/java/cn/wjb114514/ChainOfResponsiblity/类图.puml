@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'请求的接受者(处理者)：抽象处理者，定义了处理请求的接口/方法，包含另外一个handler对象
+abstract class Handler {
+    -next:Handler
+    +processRequest():void
+}
+
+'具体的接受者[具体的处理者]: 处理他自己负责的请求，由于实现抽象使得功能 专一化和具体化，所以一个抽象类只能负责自己负责的请求
+'如果可以处理,就自己处理，否则把请求交给下一个handler处理，进而形成一个链状结构。
+class ConcreteHandlerA {
+    +processRequest():void
+}
+
+class ConcreteHandlerB {
+    +processRequest():void
+}
+
+Handler -o Handler
+Handler <|-- ConcreteHandlerA
+Handler <|-- ConcreteHandlerB
+
+class Request {
+
+}
+
+Handler <-- Request
+
+class Client {
+
+}
+
+Client --> Handler
+Client --> Request
+@enduml
